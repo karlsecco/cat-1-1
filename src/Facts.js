@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import axios from "axios";
 import idx from "idx";
 import uuid from "uuid/v1";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCat } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import Counter from "./Counter";
 import { labels } from "./constants";
@@ -50,9 +52,16 @@ class Facts extends PureComponent {
     toast[variant](text, { position: toast.POSITION.BOTTOM_RIGHT });
 
   renderFacts = () => (
-    <ul>
+    <ul className="fa-ul">
       {this.state.facts.map(fact => (
-        <li key={fact.id} onClick={() => this.deleteFact(fact.id)}>
+        <li
+          className="facts__item"
+          key={fact.id}
+          onClick={() => this.deleteFact(fact.id)}
+        >
+          <span className="fa-li">
+            <FontAwesomeIcon icon={faCat} />
+          </span>
           {fact.fact}
         </li>
       ))}

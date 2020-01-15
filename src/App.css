@@ -1,0 +1,42 @@
+.header__container {
+  display: flex;
+  justify-content: center;
+}
+
+.header__text {
+  padding: 50px 100px;
+  background: lightskyblue;
+  border-radius: 100%;
+}
+
+.counter__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.counter__action-button {
+  color: lightgray;
+  cursor: pointer;
+}
+
+.counter__submit-button {
+  padding: 10px;
+  background: greenyellow;
+  border-radius: 10px;
+  box-shadow: 1px 2px lightgray;
+  color: white;
+  cursor: pointer;
+}
+
+.facts__item {
+  padding-bottom: 3px;
+}
+
+.facts__item:hover {
+  color: red;
+  text-decoration: line-through;
+  cursor: pointer;
+}
