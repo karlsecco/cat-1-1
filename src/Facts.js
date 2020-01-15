@@ -3,9 +3,11 @@ import axios from "axios";
 import idx from "idx";
 import uuid from "uuid/v1";
 import { ToastContainer, toast } from "react-toastify";
-
 import Counter from "./Counter";
+import { labels } from "./constants";
 import "react-toastify/dist/ReactToastify.min.css";
+
+const { ERROR, SUCCESS, WARN } = labels;
 
 class Facts extends PureComponent {
   state = {
@@ -21,7 +23,7 @@ class Facts extends PureComponent {
     this.setState(prevState => ({
       facts: prevState.facts.filter(fact => fact.id !== factId)
     }));
-    this.showToast("warn", "Cat fact successfully deleted");
+    this.showToast(WARN, "Cat fact successfully deleted");
   };
 
   getFacts = async numFacts => {
@@ -34,17 +36,18 @@ class Facts extends PureComponent {
         this.setState(prevState => ({
           facts: [...prevState.facts, ...this.assignId(response.data.data)]
         }));
-        this.showToast("success", "Cat facts loaded successfully!");
+        this.showToast(SUCCESS, "Cat facts loaded successfully!");
       }
     } catch (error) {
-      this.showToast("error", `Error fetching facts: ${error.message}`);
+      this.showToast(ERROR, `Error fetching facts: ${error.message}`);
     }
     this.setState({ loading: false });
   };
 
   handleSubmit = count => this.getFacts(count);
 
-  showToast = (variant, text) => toast[variant](text);
+  showToast = (variant, text) =>
+    toast[variant](text, { position: toast.POSITION.BOTTOM_RIGHT });
 
   renderFacts = () => (
     <ul>

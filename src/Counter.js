@@ -1,4 +1,7 @@
 import React, { PureComponent } from "react";
+import { labels } from "./constants";
+
+const { DECREMENT, INCREMENT } = labels;
 
 class Counter extends PureComponent {
   state = {
@@ -7,9 +10,9 @@ class Counter extends PureComponent {
 
   updateCount = action => {
     const { count } = this.state;
-    if (action === "increment" && count < 10)
+    if (action === INCREMENT && count < 10)
       this.setState(prevState => ({ count: prevState.count + 1 }));
-    else if (action === "decrement" && count > 1)
+    else if (action === DECREMENT && count > 1)
       this.setState(prevState => ({ count: prevState.count - 1 }));
   };
 
@@ -21,11 +24,11 @@ class Counter extends PureComponent {
         <h2>
           Give me{" "}
           {count > 1 && (
-            <button onClick={() => this.updateCount("decrement")}>-</button>
+            <button onClick={() => this.updateCount(DECREMENT)}>-</button>
           )}{" "}
           {count}{" "}
           {count < 10 && (
-            <button onClick={() => this.updateCount("increment")}>+</button>
+            <button onClick={() => this.updateCount(INCREMENT)}>+</button>
           )}{" "}
           more cat fact{count > 1 && "s"} right meow!
         </h2>
