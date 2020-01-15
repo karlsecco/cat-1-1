@@ -2,14 +2,14 @@ import React, { PureComponent } from "react";
 
 class Counter extends PureComponent {
   state = {
-    count: 0
+    count: 1
   };
 
   updateCount = action => {
     const { count } = this.state;
     if (action === "increment" && count < 10)
       this.setState(prevState => ({ count: prevState.count + 1 }));
-    else if (action === "decrement" && count > 0)
+    else if (action === "decrement" && count > 1)
       this.setState(prevState => ({ count: prevState.count - 1 }));
   };
 
@@ -20,7 +20,7 @@ class Counter extends PureComponent {
       <div>
         <h2>
           Give me{" "}
-          {count > 0 && (
+          {count > 1 && (
             <button onClick={() => this.updateCount("decrement")}>-</button>
           )}{" "}
           {count}{" "}
