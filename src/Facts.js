@@ -14,6 +14,11 @@ class Facts extends PureComponent {
 
   assignId = data => data.map(item => ({ ...item, id: uuid() }));
 
+  deleteFact = factId =>
+    this.setState(prevState => ({
+      facts: prevState.facts.filter(fact => fact.id !== factId)
+    }));
+
   getFacts = async numFacts => {
     try {
       this.setState({ loading: true });
@@ -37,7 +42,9 @@ class Facts extends PureComponent {
   renderFacts = () => (
     <ul>
       {this.state.facts.map(fact => (
-        <li key={fact.id}>{fact.fact}</li>
+        <li key={fact.id} onClick={() => this.deleteFact(fact.id)}>
+          {fact.fact}
+        </li>
       ))}
     </ul>
   );
