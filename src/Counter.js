@@ -15,18 +15,22 @@ class Counter extends PureComponent {
 
   render() {
     const { count } = this.state;
+    const { handleSubmit } = this.props;
     return (
-      <h2>
-        Give me{" "}
-        {count > 0 && (
-          <span onClick={() => this.updateCount("decrement")}>-</span>
-        )}{" "}
-        {count}{" "}
-        {count < 10 && (
-          <span onClick={() => this.updateCount("increment")}>{"+"}</span>
-        )}{" "}
-        more cat fact{count > 1 && "s"} right meow!
-      </h2>
+      <div>
+        <h2>
+          Give me{" "}
+          {count > 0 && (
+            <button onClick={() => this.updateCount("decrement")}>-</button>
+          )}{" "}
+          {count}{" "}
+          {count < 10 && (
+            <button onClick={() => this.updateCount("increment")}>+</button>
+          )}{" "}
+          more cat fact{count > 1 && "s"} right meow!
+        </h2>
+        <div onClick={() => handleSubmit(count)}>Use Lazer Pointer</div>
+      </div>
     );
   }
 }
