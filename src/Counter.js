@@ -1,4 +1,9 @@
 import React, { PureComponent } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMinusSquare,
+  faPlusSquare
+} from "@fortawesome/free-regular-svg-icons";
 import { labels } from "./constants";
 
 const { DECREMENT, INCREMENT } = labels;
@@ -24,11 +29,17 @@ class Counter extends PureComponent {
         <h2>
           Give me{" "}
           {count > 1 && (
-            <button onClick={() => this.updateCount(DECREMENT)}>-</button>
+            <FontAwesomeIcon
+              icon={faMinusSquare}
+              onClick={() => this.updateCount(DECREMENT)}
+            />
           )}{" "}
           {count}{" "}
           {count < 10 && (
-            <button onClick={() => this.updateCount(INCREMENT)}>+</button>
+            <FontAwesomeIcon
+              icon={faPlusSquare}
+              onClick={() => this.updateCount(INCREMENT)}
+            />
           )}{" "}
           more cat fact{count > 1 && "s"} right meow!
         </h2>
