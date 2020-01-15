@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
+import idx from "idx";
 
 import Counter from "./Counter";
 class Facts extends PureComponent {
@@ -16,7 +17,11 @@ class Facts extends PureComponent {
       const response = await axios.get(
         `https://catfact.ninja/facts?limit=${numFacts}`
       );
-      console.log(response);
+      // ensure non-null value
+      if (idx(response, _ => _.data.data))
+        this.setState(prevState => ({
+          facts: [...prevState.facts, ...response.data.data]
+        }));
     } catch (error) {
       console.log(error);
     }
@@ -25,8 +30,21 @@ class Facts extends PureComponent {
 
   handleSubmit = count => this.getFacts(count);
 
+  renderFacts = () =>
+    this.state.facts.map(fact => (
+      <ul>
+        <li>{fact.fact}</li>
+      </ul>
+    ));
+
   render() {
-    return <Counter handleSubmit={this.handleSubmit} />;
+    const facts = this.renderFacts();
+    return (
+      <div>
+        <Counter handleSubmit={this.handleSubmit} />
+        {facts}
+      </div>
+    );
   }
 }
 
