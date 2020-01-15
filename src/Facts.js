@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
 import idx from "idx";
+import uuid from "uuid/v1";
 
 import Counter from "./Counter";
 class Facts extends PureComponent {
@@ -11,6 +12,8 @@ class Facts extends PureComponent {
 
   componentDidMount = () => this.getFacts(1);
 
+  assignId = data => data.map(item => ({ ...item, id: uuid() }));
+
   getFacts = async numFacts => {
     try {
       this.setState({ loading: true });
@@ -20,8 +23,9 @@ class Facts extends PureComponent {
       // ensure non-null value
       if (idx(response, _ => _.data.data))
         this.setState(prevState => ({
-          facts: [...prevState.facts, ...response.data.data]
+          facts: [...prevState.facts, ...this.assignId(response.data.data)]
         }));
+      console.log(this.state.facts);
     } catch (error) {
       console.log(error);
     }
@@ -30,12 +34,13 @@ class Facts extends PureComponent {
 
   handleSubmit = count => this.getFacts(count);
 
-  renderFacts = () =>
-    this.state.facts.map(fact => (
-      <ul>
-        <li>{fact.fact}</li>
-      </ul>
-    ));
+  renderFacts = () => (
+    <ul>
+      {this.state.facts.map(fact => (
+        <li key={fact.id}>{fact.fact}</li>
+      ))}
+    </ul>
+  );
 
   render() {
     const facts = this.renderFacts();
